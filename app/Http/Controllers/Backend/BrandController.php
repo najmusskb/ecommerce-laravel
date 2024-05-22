@@ -1,19 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-
-
-
-// import korte hobe model ta 
+use Illuminate\Support\Str;
 use App\Models\Backend\Brand;
-
-
-
-
 
 class BrandController extends Controller
 {
@@ -22,7 +13,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.pages.brand.manage');
     }
 
     /**
@@ -30,7 +21,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.brand.create');
     }
 
     /**
@@ -38,38 +29,44 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|max:255',
+        ], [
+            'name.required' => 'Please insert the brand name',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $brand = new Brand();
+        $brand->name = $request->name;
+        $brand->slug = Str::slug($request->name);
+        $brand->description = $request->description;
+        $brand->is_featured = $request->is_featured;
+        $brand->status = $request->status;
+        $brand->save();
+
+        return redirect()->route('brand.manage')->with('success', 'Brand created successfully!');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // code for editing
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // code for updating
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // code for deleting
     }
 }

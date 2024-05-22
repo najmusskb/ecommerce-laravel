@@ -14,10 +14,10 @@
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>Widgets</span></a>
+                  data-feather="briefcase"></i><span>Brands</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="widget-chart.html">Chart Widgets</a></li>
-                <li><a class="nav-link" href="widget-data.html">Data Widgets</a></li>
+                <li><a class="nav-link" href="{{route('brand.create')}}">Add New Brand</a></li>
+                <li><a class="nav-link" href="{{route('brand.manage')}}">Manage All Brands</a></li>
               </ul>
             </li>
 

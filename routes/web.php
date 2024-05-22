@@ -1,22 +1,18 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-Route::group(['prefix'=> 'admin'],function(){
-    route::get('/dashboard','App\Http\Controllers\Backend\pagesController@index')->name('dashboard');
+use App\Http\Controllers\Backend\BrandController;
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/dashboard', 'App\Http\Controllers\Backend\pagesController@index')->name('dashboard');
 
     // Brand Route for Route
-    Route::group(['prefix'=>'brand'],function(){
-        Route::get('/manage','App\Http\Controllers\Backend\BrandController@index')->name('brand.manage');
-
-        Route::get('/create','App\Http\Controllers\Backend\BrandController@create')->name('brand.create');
-
-        Route::post('/store','App\Http\Controllers\Backend\BrandController@store')->name('brand.store');
-
-        Route::get('/edit/{id}','App\Http\Controllers\Backend\BrandController@edit')->name('brand.edit');
-
-        Route::post('/edit/{id}','App\Http\Controllers\Backend\BrandController@update')->name('brand.edit');
-
-        Route::post('/delete/{id}','App\Http\Controllers\Backend\BrandController@destroy')->name('brand.destroy');
-
+    Route::group(['prefix' => 'brand'], function() {
+        Route::get('/manage', [BrandController::class, 'index'])->name('brand.manage');
+        Route::get('/create', [BrandController::class, 'create'])->name('brand.create');
+        Route::post('/store', [BrandController::class, 'store'])->name('brand.store');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+        Route::post('/edit/{id}', [BrandController::class, 'update'])->name('brand.update');
+        Route::post('/delete/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
     });
 });
+
