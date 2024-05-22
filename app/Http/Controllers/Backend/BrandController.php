@@ -63,24 +63,77 @@ class BrandController extends Controller
 
     return redirect()->route('brand.manage')->with('success', 'Brand created successfully!');
 }
-    public function edit($id)
-    {
-        // code for editing
-    }
+
+
+public function edit($id)
+{
+    $brand = Brand::findOrFail($id); // Fetch the brand by its ID
+    return view('backend.pages.brand.edit', compact('brand'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        // code for updating
+   public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|max:255',
+        'description' => 'required',
+        'is_featured' => 'required|in:0,1',
+        'status' => 'required|in:0,1',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Find the brand by ID
+    $brand = Brand::findOrFail($id);
+    
+    // Handle image upload if a new image is provided
+    if ($request->hasFile('image')) {
+        // Delete existing image if it exists
+        if ($brand->image) {
+            File::delete(public_path($brand->image));
+        }
+        
+        // Upload new image
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imagePath = 'Backend/img/brand/' . $imageName;
+        $image->move(public_path('Backend/img/brand'), $imageName);
+        
+        // Update brand image path
+        $brand->image = $imagePath;
     }
+
+    // Update other brand fields
+    $brand->name = $request->name;
+    $brand->slug = Str::slug($request->name);
+    $brand->description = $request->description;
+    $brand->is_featured = $request->is_featured;
+    $brand->status = $request->status;
+
+    // Save the changes
+    $brand->save();
+
+    return redirect()->route('brand.manage')->with('success', 'Brand updated successfully!');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
-    {
-        // code for deleting
+   
+public function destroy($id)
+{
+    // Find the brand by ID
+    $brand = Brand::findOrFail($id);
+
+    // Delete the brand's image if it exists
+    if ($brand->image) {
+        File::delete(public_path($brand->image));
     }
+
+    // Delete the brand
+    $brand->delete();
+
+    return redirect()->route('brand.manage')->with('success', 'Brand deleted successfully!');
+}
 }

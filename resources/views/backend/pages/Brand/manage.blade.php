@@ -37,9 +37,15 @@
                                 <td>{{ $brand->is_featured ? 'Yes' : 'No' }}</td>
                                 <td>{{ $brand->status ? 'Active' : 'Inactive' }}</td>
                                 <td>
-                                    <a href="#"><i class="far fa-edit" style="color:blue;font-size:20px;margin-left:15px"></i></a>
-                                    <a href="#"><i class="fas fa-trash-alt" style="color:red;font-size:20px"></i></a>
-                                </td>
+                                    <a href="{{ route('brand.edit', $brand->id) }}"><i class="far fa-edit" style="color:blue;font-size:20px;margin-left:15px"></i></a>
+<form id="deleteForm{{$brand->id}}" action="{{ route('brand.destroy', $brand->id) }}" method="POST" style="display: inline;">
+    @csrf
+    @method('DELETE')
+    <a href="#" onclick="event.preventDefault(); document.getElementById('deleteForm{{$brand->id}}').submit();">
+        <i class="fas fa-trash-alt" style="color:red;font-size:20px"></i>
+    </a>
+</form>
+</td>
                             </tr>
                             @endforeach
                         </tbody>
