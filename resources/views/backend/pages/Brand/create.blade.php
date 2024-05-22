@@ -34,6 +34,10 @@
                             <option value="0">Inactive</option>
                         </select>
                     </div>
+                     <div class="form-group mb-0">
+                    <label>Brand Image / Logo</label>
+                    <input type="file" name="image" class="form-control-file">
+               </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
