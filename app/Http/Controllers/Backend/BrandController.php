@@ -11,18 +11,13 @@ use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+ 
     public function index()
     {
     $brands = Brand::all(); // Fetch all brands
     return view('backend.pages.brand.manage', compact('brands'));
    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('backend.pages.brand.create');

@@ -17,3 +17,5 @@
   <script src="{{asset('Backend/assets/bundles/jquery-ui/jquery-ui.min.js')}}"></script>
   <!-- Page Specific JS File -->
   <script src="{{asset('Backend/assets/js/page/datatables.js')}}"></script>
+  <script src="{{asset('Backend/assets/bundles/izitoast/js/iziToast.min.js')}}"></script>
+  <script src="{{asset('Backend/assets/js/page/toastr.js')}}"></script>

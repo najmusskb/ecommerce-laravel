@@ -11,3 +11,4 @@
 
 <link rel="stylesheet" href="{{asset('Backend/assets/bundles/datatables/datatables.min.css')}}">
 <link rel="stylesheet" href="{{asset('Backend/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('Backend/assets/bundles/izitoast/css/iziToast.min.css')}}">
