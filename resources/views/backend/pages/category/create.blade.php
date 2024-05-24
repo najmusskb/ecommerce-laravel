@@ -18,12 +18,14 @@
                         <label>Category Description</label>
                         <textarea class="form-control" name="description"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Is Featured</label>
+
+                  <div class="form-group">
+                        <label>Category / Subcategory</label>
                         <select class="form-control" name="is_parent">
                             <option value="0">Please Select the Parent Category if any</option>
-                            <option value="1">Yes Featured</option>
-                            <option value="0">Not Featured</option>
+                            @foreach(App\Models\Backend\Category::orderBy('name', 'asc')->where('is_parent', 0)->get() as $pcat)
+                                <option value="{{ $pcat->id }}">{{ $pcat->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">

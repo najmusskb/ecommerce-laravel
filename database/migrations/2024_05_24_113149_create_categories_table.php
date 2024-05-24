@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->integer('is_parent')->default(0)->comment('0 for parent, 1 for Children');
+            $table->integer('is_parent')->default(0)->comment('0 for parent , any value for child');
             $table->integer('status')->default(0)->comment('0 for inactive, 1 for active');
             $table->timestamps();
         });
