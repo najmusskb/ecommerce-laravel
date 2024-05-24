@@ -5,8 +5,8 @@
     <div class="col-12">
         <div class="card">
            <div class="card-header" style="display: flex; justify-content: space-between;">
-            <h4>Manage Brands</h4>
-            <h4><a href="{{ route('brand.create') }}" class="btn btn-primary">Add Brand</a></h4>
+            <h4>Manage All Category</h4>
+            <h4><a href="{{ route('category.create') }}" class="btn btn-primary">Add category</a></h4>
         </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,41 +18,41 @@
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th>Description</th>
-                                <th>Is Featured</th>
+                                <th>Category / Subcategory</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($brands as $brand)
+                            @foreach ($categories as $category)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                   @if ($brand->image)
-                                  <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}" width="100">
+                                   @if ($category->image)
+                                  <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" width="100">
                                   @else
                                    No Image
                                   @endif
                                 </td>
-                                <td>{{ $brand->name }}</td>
-                                <td>{{ $brand->slug }}</td>
-                                <td>{{ $brand->description }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>{{ $category->slug }}</td>
+                                <td>{{ $category->description }}</td>
                                 <td>
-                                    <span class="badge text-white {{ $brand->is_featured ? 'bg-success' : 'bg-warning' }}">
-                                        {{ $brand->is_featured ? 'Yes' : 'No' }}
+                                    <span class="badge text-white {{ $category->is_parent ? 'bg-success' : 'bg-warning' }}">
+                                        {{ $category->is_parent ? 'Yes' : 'No' }}
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="badge text-white {{ $brand->status ? 'bg-success' : 'bg-warning' }}">
-                                        {{ $brand->status ? 'Active' : 'Inactive' }}
+                                    <span class="badge text-white {{ $category->status ? 'bg-success' : 'bg-warning' }}">
+                                        {{ $category->status ? 'Active' : 'Inactive' }}
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{{ route('brand.edit', $brand->id) }}"><i class="far fa-edit" style="color:blue;font-size:20px;margin-left:15px"></i></a>
-                                    <form id="deleteForm{{$brand->id}}" action="{{ route('brand.destroy', $brand->id) }}" method="POST" style="display: inline;">
+                                    <a href="{{ route('category.edit', $category->id) }}"><i class="far fa-edit" style="color:blue;font-size:20px;margin-left:15px"></i></a>
+                                    <form id="deleteForm{{$category->id}}" action="{{ route('category.destroy', $category->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="#" onclick="event.preventDefault(); confirmDelete('{{$brand->id}}');">
+                                    <a href="#" onclick="event.preventDefault(); confirmDelete('{{$category->id}}');">
                                         <i class="fas fa-trash-alt" style="color:red;font-size:20px"></i>
                                     </a>
                                 </form>
